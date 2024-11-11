@@ -1,5 +1,4 @@
 import { auth, signOut, signIn } from "@/auth"
-
 import Image from "next/image"
 import Link from "next/link"
 
@@ -28,7 +27,9 @@ const Navbar = async () => {
                   <span>Logout</span>
                 </button>
               </form>
-              <Link href={`/user/${session?.id}`}>{session?.user?.name}</Link>
+              <Link href={`/user/${session?.user?.id}`}>
+                {session?.user?.name}
+              </Link>
             </>
           ) : (
             <>
@@ -41,29 +42,6 @@ const Navbar = async () => {
               </form>
             </>
           )}
-          {/* {session && session?.user ? (
-            <>
-              <Link href="/startup/create">
-                <span>Create</span>
-              </Link>
-
-              <button onClick={signOut}>
-                <span>Logout</span>
-                </button>
-
-              <Link href={`/user/${session?.id}`}>{session?.user?.name}</Link>
-            
-          ) : (
-            <>
-              <form
-                action={async () => {
-                  "use server"
-                  await signIn(provider: "github" )
-                }}>
-                <button type='submit'>Login</button>
-              </form>
-            </>
-          )} */}
         </div>
       </nav>
     </div>
