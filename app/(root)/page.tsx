@@ -12,7 +12,7 @@ export default async function Home({
     {
       _createdAt: new Date(),
       Views: 55,
-      author: { _id: 1 },
+      author: { _id: 1, name: "John Doe" },
       _id: 1,
       description: "This is a descriptions",
       image:
@@ -25,7 +25,7 @@ export default async function Home({
   return (
     <div>
       <section className='pink_container'>
-        <h1 className='heading'>Pitch Your Startup Idea</h1>
+        <h1 className='heading'>Pitch Your Startup Idea, Vote on Pitch</h1>
         <p className='sub-heading !max-w-3xl'>
           Submit Ideas, Vote on Pitchs, and Get Noticed in Virtual Competitions.
         </p>
