@@ -1,5 +1,7 @@
 import SearchForm from "@/components/SearchForm"
 import StartupCard from "@/components/StartupCard"
+import { client } from "@/sanity/lib/client"
+import { STARTUPS_QUERY } from "@/sanity/lib/queries"
 
 export default async function Home({
   searchParams,
@@ -8,19 +10,23 @@ export default async function Home({
 }) {
   const query = (await searchParams).query
 
-  const posts = [
-    {
-      _createdAt: new Date(),
-      Views: 55,
-      author: { _id: 1, name: "John Doe" },
-      _id: 1,
-      description: "This is a descriptions",
-      image:
-        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      category: "Robots",
-      title: "This is a title",
-    },
-  ]
+  const posts = await client.fetch(STARTUPS_QUERY)
+
+  // console.log(JSON.stringify(posts, null, 2))
+
+  // const posts = [
+  //   {
+  //     _createdAt: new Date(),
+  //     Views: 55,
+  //     author: { _id: 1, name: "John Doe" },
+  //     _id: 1,
+  //     description: "This is a descriptions",
+  //     image:
+  //       "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //     category: "Robots",
+  //     title: "This is a title",
+  //   },
+  // ]
 
   return (
     <div>
