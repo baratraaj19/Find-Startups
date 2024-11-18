@@ -1,12 +1,13 @@
 import { formateDate } from "@/lib/utils"
 import { client } from "@/sanity/lib/client"
 import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries"
-import { EyeIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import React from "react"
-// import markdownit from "markdown-it"
+import markdownit from "markdown-it"
+
+const md = new markdownit()
 
 export const exprimental_ppr = true
 
@@ -17,7 +18,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   if (!post) return notFound()
 
-  //   const parsedContent = post.content
+  const parsedContent = md.render(post?.Pitch || "")
 
   return (
     <div>
@@ -56,6 +57,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             <p className='category-tag'>{post.category}</p>
           </div>
           <h3 className='text-30-bold'>Pitch Details</h3>
+          {parsedContent ? (
+            <article dangerouslySetInnerHTML={{ __html: parsedContent }} />
+          ) : (
+            <p className='no-results'>No results found</p>
+          )}
         </div>
       </section>
     </div>
