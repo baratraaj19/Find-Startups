@@ -20,9 +20,9 @@ const config: Config = {
           "900": "#0A4DA8", // Dark blue for strong accent
         },
         secondary: {
-          "100": "#CFF9E1", // Light teal for softer accent
-          DEFAULT: "#2CA58D", // Teal for main accent color
-          "900": "#1A6151", // Dark teal for contrast
+          "100": "#FFF7CC", // Light yellow for softer accent
+          DEFAULT: "#FFD700", // Yellow for main accent color (golden yellow)
+          "900": "#B38600", // Dark yellow for contrast (golden brown)
         },
         black: {
           "100": "#1A1A1A", // Soft black for subtle contrast

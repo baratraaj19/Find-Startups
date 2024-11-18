@@ -29,6 +29,11 @@ export const startup = defineType({
     defineField({
       name: "description",
       type: "text",
+      validation: (Rule) =>
+        Rule.min(130)
+          .max(500)
+          .error("Description must be between 130 and 500 characters long.")
+          .required(),
     }),
     defineField({
       name: "category",

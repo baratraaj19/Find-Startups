@@ -3,12 +3,17 @@ import { EyeIcon } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "./ui/button"
+import { Author, Startup } from "@/sanity/types"
 
-const StartupCard = ({ post }: { post: StartupCardType }) => {
+export type StartupTypeCard = Omit<Startup, "author"> & {
+  author?: Author
+}
+
+const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   const {
     _createdAt,
     views,
-    author: { _id: authorId, name },
+    author,
     description,
     image,
     _id,
@@ -16,7 +21,15 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
     title,
   } = post
 
-  // console.log(views)
+  // Ensure the description is at least 130 characters long
+  const limitedDescription = description
+    ? description.length > 180
+      ? description.slice(0, 150) + "..."
+      : description.length < 130
+        ? description.padEnd(130, " ") + "..."
+        : description
+    : "No description available"
+
   return (
     <div>
       <li className='startup-card group'>
@@ -29,9 +42,9 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
         </div>
         <div className='flex-between mt-5 gap-5'>
           <div className='flex-1'>
-            <Link href={`/user/${authorId}`}>
+            <Link href={`/user/${author?._id}`}>
               <p className='text-16-medium line-clamp-1 hover:underline'>
-                {name}
+                {author?.name}
               </p>
             </Link>
             <Link href={`/startup/${_id}`}>
@@ -40,7 +53,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
               </h3>
             </Link>
           </div>
-          <Link href={`/startup/${authorId}`}>
+          <Link href={`/startup/${author?._id}`}>
             <Image
               src='https://placehold.co/52x52'
               alt='profile image'
@@ -51,7 +64,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
           </Link>
         </div>
         <Link href={`/startup/${_id}`}>
-          <p className='startup-card-desc '>{description}</p>
+          <p className='startup-card-desc'>{limitedDescription}</p>
           <img
             src={image}
             alt={title}
@@ -59,7 +72,7 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
           />
         </Link>
         <div className='flex-between gap-3 mt-5'>
-          <Link href={`/?query=${category.toLowerCase()}`}>
+          <Link href={`/?query=${category?.toLowerCase()}`}>
             <p className='text-16-medium'>{category}</p>
           </Link>
           <Button className='startup-card_btn' asChild>
