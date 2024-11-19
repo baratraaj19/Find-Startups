@@ -30,16 +30,15 @@ export const startup = defineType({
       name: "description",
       type: "text",
       validation: (Rule) =>
-        Rule.min(130)
-          .max(500)
-          .error("Description must be between 130 and 500 characters long.")
-          .required(),
+        Rule.error(
+          "Description must be between 130 and 500 characters long."
+        ).required(),
     }),
     defineField({
       name: "category",
       type: "string",
       validation: (Rule) =>
-        Rule.min(1).max(20).required().error("Please enter a valid category"),
+        Rule.required().error("Please enter a valid category"),
     }),
     defineField({
       name: "image",
