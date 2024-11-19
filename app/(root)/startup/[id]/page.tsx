@@ -21,15 +21,18 @@ export const experimental_ppr = true
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id
 
-  const [post, { select: editorPosts }] = await Promise.all([
+  const [post, editorPostsData] = await Promise.all([
     client.fetch(STARTUP_BY_ID_QUERY, { id }),
-    client.fetch(PLAYLIST_BY_SLUG_QUERY, {
-      slug: "editor-picks-new",
-    }),
+    client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks-new" }),
   ])
 
+  // If no post is found, show 404 page
   if (!post) return notFound()
 
+  // Extract editor posts or use an empty array if undefined
+  const editorPosts = editorPostsData?.posts || []
+
+  // Parse the content with Markdown
   const parsedContent = md.render(post?.pitch || "")
 
   return (
@@ -85,7 +88,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
         <hr className='divider' />
 
-        {editorPosts?.length > 0 && (
+        {Array.isArray(editorPosts) && editorPosts.length > 0 && (
           <div className='max-w-4xl mx-auto'>
             <p className='text-30-semibold'>Editor Picks</p>
 
