@@ -25,4 +25,24 @@ Pitch Nest is a modern web application built using Next.js, Tailwind CSS, and ot
    git clone https://github.com/your-repo/pitch-nest.git
 
 2. Navigate to the project directory:
+   ```bash
+   cd pitch-nest
    
+3. Install dependencies:
+   ```bash
+   npm install
+
+4. Start the development server:
+   ```bash
+   npm run dev
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request.
+
+## Acknowledgments
+
+- **Sanity.io**
+- **NextAuth.js**
+- **Tailwind CSS**
+- **Sentry**
