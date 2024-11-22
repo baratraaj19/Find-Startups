@@ -1,6 +1,6 @@
 # Pitch Nest
 
-Pitch Nest is a modern web application built using Next.js, Tailwind CSS, and other powerful tools, designed to [describe the purpose or unique features of your app, e.g., "streamline pitch creation for startups"].
+Pitch Nest is a modern web application built using Next.js, Tailwind CSS, and other powerful tools, a platform designed to streamline pitch creation for startups, allowing users to pitch their startup ideas, vote for others' ideas, and potentially fund them in the future.
 
 ## Features
 
@@ -22,7 +22,7 @@ Pitch Nest is a modern web application built using Next.js, Tailwind CSS, and ot
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-repo/pitch-nest.git
+   git clone https://github.com/baratraaj19/Find-Startups.git
 
 2. Navigate to the project directory:
    ```bash
