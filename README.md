@@ -1,37 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pitch Nest
 
-## Getting Started
+Pitch Nest is a modern web application built using Next.js, Tailwind CSS, and other powerful tools, designed to [describe the purpose or unique features of your app, e.g., "streamline pitch creation for startups"].
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Authentication**: Secure user login and registration powered by NextAuth.js.
+- **Custom Components**: A reusable component library for a seamless development experience.
+- **Sanity Integration**: Headless CMS support for managing dynamic content.
+- **Tailwind CSS Styling**: Fully responsive and beautifully styled UI.
+- **Sentry Error Tracking**: Integrated monitoring for performance and error tracking.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js**: React framework for building server-rendered applications.
+- **Sanity.io**: Headless CMS for content management.
+- **NextAuth.js**: Authentication library for securing the app.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Sentry**: Monitoring for identifying and fixing errors.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
 
-## Learn More
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/your-repo/pitch-nest.git
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Find-Startups
+2. Navigate to the project directory:
+   
