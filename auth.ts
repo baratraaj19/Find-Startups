@@ -45,8 +45,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token
     },
     async session({ session, token }) {
-      if (token.id && session.user) {
-        session.user.id = token.id as string
+      const user = await client
+        .withConfig({
+          useCdn: false,
+        })
+        .fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
+          id: token.sub,
+        })
+      if (session.user) {
+        session.user.id = user._id
       }
       return session
     },
