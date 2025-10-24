@@ -34,7 +34,7 @@ export async function DELETE(
       })
     }
 
-    if (startup.author._ref !== session.id) {
+    if (startup.author._ref !== session?.user?.id) {
       return new Response(JSON.stringify({ message: "Forbidden" }), {
         status: 403,
         headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ export async function PATCH(
       })
     }
 
-    if (startup.author._ref !== session.id) {
+    if (startup.author._ref !== session?.user?.id) {
       return new Response(JSON.stringify({ message: "Forbidden" }), {
         status: 403,
         headers: { "Content-Type": "application/json" },
