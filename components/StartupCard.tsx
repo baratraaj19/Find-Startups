@@ -15,6 +15,7 @@ export type StartupTypeCard = Omit<Startup, "author"> & {
 const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
   const {
     _createdAt,
+    _updatedAt,
     views,
     author,
     description,
@@ -40,7 +41,9 @@ const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
     <div>
       <li className='startup-card group'>
         <div className='flex-between'>
-          <p className='startup_card_date'>{formatDate(_createdAt)}</p>
+          <p className='startup_card_date'>
+            {formatDate(_updatedAt || _createdAt)}
+          </p>
           <div className='flex-between gap-1.5'>
             <div className='flex gap-1.5'>
               <EyeIcon className='size-5 text-primary' />
@@ -84,9 +87,16 @@ const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
           <Link href={`/?query=${category?.toLowerCase()}`}>
             <p className='text-16-medium'>{category}</p>
           </Link>
-          <Button className='startup-card_btn' asChild>
-            <Link href={`/startup/${_id}`}>Details</Link>
-          </Button>
+          <div className="flex gap-2">
+            <Button className='startup-card_btn' asChild>
+              <Link href={`/startup/${_id}`}>Details</Link>
+            </Button>
+            {userId === author?._id && (
+              <Button className='startup-card_btn' asChild>
+                <Link href={`/startup/${_id}/edit`}>Edit</Link>
+              </Button>
+            )}
+          </div>
         </div>
       </li>
     </div>
