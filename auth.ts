@@ -5,12 +5,7 @@ import { AUTHOR_BY_GITHUB_ID_QUERY } from "./sanity/lib/queries"
 import { writeClient } from "./sanity/lib/write-client"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [
-    GitHub({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
-    }),
-  ],
+  providers: [GitHub],
   callbacks: {
     async signIn({
       user: { name, email, image },
@@ -36,17 +31,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return true
     },
-    async session({ session, token }) {
-      const user = await client
-        .withConfig({
-          useCdn: false,
-        })
-        .fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
-          id: token.sub,
-        })
-      if (session.user) {
-        session.user.id = user._id
+    async jwt({ token, account, profile }) {
+      if (account && profile) {
+        const user = await client
+          .withConfig({
+            useCdn: false,
+          })
+          .fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
+            id: profile?.id,
+          })
+        token.id = user?._id
       }
+      return token
+    },
+    async session({ session, token }) {
+      Object.assign(session, { id: token.id })
       return session
     },
   },

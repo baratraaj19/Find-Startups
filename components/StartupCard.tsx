@@ -26,7 +26,7 @@ const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
   } = post
 
   const session = await auth()
-  const userId = session?.user?.id
+  const userId = session?.id
 
   // Ensure the description is at least 130 characters long
   const limitedDescription = description
