@@ -11,7 +11,7 @@ const EditPage = async ({ params }: { params: { id: string } }) => {
     id: params.id,
   })
 
-  if (session?.id !== startup.author._id) {
+  if (session?.user?.id !== startup.author._id) {
     redirect("/")
   }
 
