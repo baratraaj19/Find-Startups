@@ -5,12 +5,14 @@ import Image from "next/image"
 import { Button } from "./ui/button"
 import { Author, Startup } from "@/sanity/types"
 import { Skeleton } from "./ui/skeleton"
+import DeleteButton from "./DeleteButton"
+import { auth } from "@/auth"
 
 export type StartupTypeCard = Omit<Startup, "author"> & {
   author?: Author
 }
 
-const StartupCard = ({ post }: { post: StartupTypeCard }) => {
+const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
   const {
     _createdAt,
     views,
@@ -21,6 +23,9 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
     category,
     title,
   } = post
+
+  const session = await auth()
+  const userId = session?.user?.id
 
   // Ensure the description is at least 130 characters long
   const limitedDescription = description
@@ -36,9 +41,12 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
       <li className='startup-card group'>
         <div className='flex-between'>
           <p className='startup_card_date'>{formatDate(_createdAt)}</p>
-          <div className='flex gap-1.5'>
-            <EyeIcon className='size-5 text-primary' />
-            <span className='text-16-medium'>{views}</span>
+          <div className='flex-between gap-1.5'>
+            <div className='flex gap-1.5'>
+              <EyeIcon className='size-5 text-primary' />
+              <span className='text-16-medium'>{views}</span>
+            </div>
+            {userId === author?._id && <DeleteButton id={_id} />}
           </div>
         </div>
         <div className='flex-between mt-5 gap-5'>
