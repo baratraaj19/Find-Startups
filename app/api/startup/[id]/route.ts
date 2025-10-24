@@ -1,11 +1,21 @@
 import { auth } from "@/auth"
-import { client } from "@/sanity/lib/client"
+import { writeClient } from "@/sanity/lib/write-client"
 
 export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
 ) {
   const session = await auth()
+
+  if (!process.env.SANITY_WRITE_TOKEN) {
+    return new Response(
+      JSON.stringify({ message: "Missing SANITY_WRITE_TOKEN" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+  }
 
   if (!session) {
     return new Response(JSON.stringify({ message: "Unauthorized" }), {
@@ -15,7 +25,7 @@ export async function DELETE(
   }
 
   try {
-    const startup = await client.getDocument(params.id)
+    const startup = await writeClient.getDocument(params.id)
 
     if (!startup) {
       return new Response(JSON.stringify({ message: "Startup not found" }), {
@@ -24,14 +34,14 @@ export async function DELETE(
       })
     }
 
-    if (startup.author._ref !== session.user.id) {
+    if (startup.author._ref !== session.id) {
       return new Response(JSON.stringify({ message: "Forbidden" }), {
         status: 403,
         headers: { "Content-Type": "application/json" },
       })
     }
 
-    await client.delete(params.id)
+    await writeClient.delete(params.id)
 
     return new Response(
       JSON.stringify({ message: "Startup deleted successfully" }),
